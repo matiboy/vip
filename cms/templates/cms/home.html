@@ -1,0 +1,31 @@
+{% extends "cms/base.html" %}
+{% load static %}
+{% block css %}
+<link href="{% static "css/home.css" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block activenav %}home{% endblock %}
+{% block scripts %}
+<script src="{% static "js/home.js" %}" language="javascript" type="text/javascript"></script>
+<script language="javascript"></script>
+{% endblock %}
+{% block title %}Maxman Control Panel | Home{% endblock %}
+{% block pagetitle %}Control Panel{% endblock %}
+{% block heroextra %}<p>Administer the Maxman platform</p><div class="btn btn-large btn-success" id="home-synchronize" data-url="{% url daemon.synchronize %}"><i class="icon-refresh icon-white"></i> Synchronise</div><span id="home-loading"></span>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6">
+            <h1><a href="{% url cms.users.list %}"><img src="{% static "img/icons/users.png" %}"> Users</a></h1>
+            <h3>View and manage users</h3>
+            <h1><a href="{% url cms.statics.list %}"><img src="{% static "img/icons/sections.png" %}"> Sections</a></h1>
+            <h3>View and manage section content</h3>
+            <h1><a href="{% url cms.adverts.list %}"><img src="{% static "img/icons/adverts.png" %}"> Adverts</a></h1>
+            <h3>View and manage ads and their related tags</h3>
+    </div>
+    <div class="span6">
+            <h1><a href="{% url cms.channels.list %}"><img src="{% static "img/icons/channels.png" %}"> Channels</a></h1>
+            <h3>View and manage channels and related media</h3>
+            <h1><a href="{% url cms.media.list %}"><img src="{% static "img/icons/analytics.png" %}"> Analytics</a></h1>
+            <h3>View and manage platform usage metrics</h3>
+    </div>
+    </div>
+{% endblock %}

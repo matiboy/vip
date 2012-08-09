@@ -1,0 +1,21 @@
+{% extends "cms/base.html" %}
+{% load static %}
+{% block css %}
+<link href="{% static "css/advert_form.css" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block activenav %}ads{% endblock %}
+{% block scripts %}
+<script src="{% static "js/advert_form.js" %}" language="javascript" type="text/javascript"></script>
+<script language="javascript"></script>
+{% endblock %}
+{% block title %}Maxman Control Panel | {{ name }}{% endblock %}
+{% block pagetitle %}{{ name }}{% endblock %}
+{% block heroextra %}Create a new Advert entry <a href="{% url cms.adverts.list %}"><div class="btn btn-warning">Cancel</div></a> {% include "cms/forms/two_submit_buttons.html" %}{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" action="{{ action }}">{% csrf_token %}
+    {{ form.as_table }}
+    <br />
+    {% include "cms/forms/two_submit_buttons.html" %}
+    <input type="hidden" id="button-pressed" name="button-pressed" />
+</form>
+{% endblock %}

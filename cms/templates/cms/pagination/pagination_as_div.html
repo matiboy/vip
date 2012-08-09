@@ -1,0 +1,39 @@
+{% if is_paginated %}
+    <div class="pagination pagination-centered">
+        <ul>
+            <li {% if page_obj.has_previous %}{% else %}class="disabled"{% endif %}><a href="{{ base }}?page={{ page_obj.previous_page_number }}">Prev</a></li>
+            {% if page_obj.number == 2 %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber="1" %}
+            {% elif page_obj.number == 3 %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber="1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber="2" %}
+            {% elif page_obj.number == 4 %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber="1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"-2" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"-1" %}
+            {% elif page_obj.number > 4 %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber="1" %}
+            {% include "cms/pagination/pagination_as_div_row_disabled.html" with pagenumber="..." %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"-2" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"-1" %}
+            {% endif %}
+            {% include "cms/pagination/pagination_as_div_row_active.html" with pagenumber=page_obj.number %}
+            {% if page_obj.number == page_obj.paginator.num_pages|add:"-1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.paginator.num_pages %}
+            {% elif page_obj.number == page_obj.paginator.num_pages|add:"-2" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.paginator.num_pages|add:"-1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.paginator.num_pages %}
+            {% elif page_obj.number == page_obj.paginator.num_pages|add:"-3" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"2" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.paginator.num_pages %}
+            {% elif page_obj.number < page_obj.paginator.num_pages|add:"-3" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"1" %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.number|add:"2" %}
+            {% include "cms/pagination/pagination_as_div_row_disabled.html" with pagenumber="..." %}
+            {% include "cms/pagination/pagination_as_div_row.html" with pagenumber=page_obj.paginator.num_pages %}
+            {% endif %}
+            <li {% if page_obj.has_next %}{% else %}class="disabled"{% endif %}><a href="{{ base }}?page={{ page_obj.next_page_number }}">Next</a></li>
+        </span>
+    </div>
+{% endif %}

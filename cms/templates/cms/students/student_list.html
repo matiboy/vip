@@ -1,0 +1,47 @@
+{% extends "cms/base.html" %}
+{% load static %}
+{% block css %}
+<link href="{% static "css/home.css" %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block activenav %}ads{% endblock %}
+{% block scripts %}
+<script src="{% static "js/advert_list.js" %}" language="javascript" type="text/javascript"></script>
+<script language="javascript"></script>
+{% endblock %}
+{% block title %}Maxman Control Panel | Adverts{% endblock %}
+{% block pagetitle %}Adverts{% endblock %}
+{% block heroextra %}<p>Administer your adverts</p>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span12">
+            <h1>Adverts <a href="{% url cms.adverts.create %}"><div class="btn btn-primary">Add</div></a></h1>
+            <br />
+            {% include "cms/forms/filter_by.html" with name="title" value=filters.title %} <div class="btn btn-info" data-base="{% url cms.adverts.list %}/" id="go-button-filter">Go</div>
+            {% include "cms/pagination/pagination_as_div.html" with base=request.path %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th width="25">#</th>
+                        <th>Title</th>
+                        <th>Impressions</th>
+                        <th>Hits</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for advert in advert_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ advert.title }}</td>
+                        <td>{{ advert.impressions }}</td>
+                        <td>{{ advert.hits }}</td>
+                        <td><a href="{% url cms.adverts.update pk=advert.id %}"><div class="btn btn-warning">Edit</div></a> <a class="remove" data-base="{% url cms.adverts.delete pk=advert.id %}"><div class="btn btn-danger">Remove</div></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% include "cms/pagination/pagination_as_div.html" with base=request.path %}
+        </div>
+    </div>
+    <form action="" method="post">{% csrf_token %}</form>
+{% endblock %}
